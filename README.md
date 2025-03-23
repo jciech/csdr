@@ -38,6 +38,8 @@ Run:
 And:
 
     make clean
+    sudo make PREFIX=/usr/local install (this will fail the first time around)
+    ln -s libcsdr.dylib libcsdr.so.0.15
     sudo make PREFIX=/usr/local install
 
 
