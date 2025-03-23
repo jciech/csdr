@@ -1,6 +1,9 @@
 CSDR
 ====
 
+This is a for of CSDR tweaked to compile on Apple Silicon Macs.
+
+
 `csdr` is a command line tool to carry out DSP tasks for Software Defined Radio.
 
 It can be used to build simple signal processing flow graphs, right from the command line. 
@@ -25,20 +28,26 @@ This animation shows the Gardner timing recovery algorithm in `csdr` locking on 
 How to compile
 --------------
 
-    make
-    sudo make install
+Make sure you have homebrew available.
 
-The project was only tested on Linux. It has the following dependencies: `libfftw3-dev`
+Run:
 
-If you compile on ARM, please edit the Makefile and tailor `PARAMS_NEON` for your CPU.
+    brew install fftw
+    xcode-select --install
 
-To run the examples, you will also need <a href="http://sdr.osmocom.org/trac/wiki/rtl-sdr">rtl_sdr</a> from Osmocom, and the following packages (at least on Debian): `mplayer octave gnuplot gnuplot-x11`
+And:
 
-If you compile `fftw3` from sources for use with `libcsdr`, you need to configure it with 32-bit float support enabled: 
+    make clean
+    sudo make PREFIX=/usr/local install
 
-    ./configure --enable-float
 
-(This is for `fftw3`, not `libcsdr`. You do not need to run the configure script before compiling `libcsdr`.)
+And fix the dynamic file linking by running:
+
+    sudo install_name_tool -add_rpath /usr/local/lib /usr/local/bin/csdr
+    sudo cp libcsdr.dylib /usr/local/lib/
+    sudo ln -s /usr/local/lib/libcsdr.dylib /usr/local/lib/libcsdr.so.0.15
+
+The other options written out in the original repositories installation instructions haven't been tested and optimised for.
 
 Credits
 -------

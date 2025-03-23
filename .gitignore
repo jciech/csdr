@@ -1,10 +1,20 @@
+# macOS metadata
+.DS_Store
+
+# Build artifacts
 csdr
 nmux
 ddcd
+libcsdr.dylib
+libcsdr.so
+libcsdr.so.*
 *.o
 *.so
-*.so.*
-tags
-dumpvect.*.vect
-*.swp
-grc_tests/top_block.py
+*.dylib
+
+# Debug symbols
+*.dSYM/
+
+# Dump files (if still enabled)
+dumpvect*.vect
+libcsdr.disasm
